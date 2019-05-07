@@ -1,0 +1,68 @@
+{
+    "title": "API Discovery Service",
+    "description": "Provides information about other Google APIs, such as what APIs are available, the resource, and method details for each API.",
+    "docsUrl": "https://developers.google.com/discovery/",
+    "url": "https://api.apis.guru/v2/specs/googleapis.com/discovery/v1/swagger.json",
+    "envVars": {},
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://www.googleapis.com/discovery/v1",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            }
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "discovery_apis_list": {
+            "main": "./lib/actions/discovery_apis_list.js",
+            "title": "Retrieve the list of APIs supported at this endpoint.",
+            "description": "Retrieve the list of APIs supported at this endpoint.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/discovery_apis_list.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "discovery_apis_getRest": {
+            "main": "./lib/actions/discovery_apis_getRest.js",
+            "title": "Retrieve the description of a particular version of an api.",
+            "description": "Retrieve the description of a particular version of an api.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/discovery_apis_getRest.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}
